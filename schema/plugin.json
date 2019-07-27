@@ -1,0 +1,16 @@
+{
+  "jupyter.lab.setting-icon-class": "jp-SettingsIcon",
+  "jupyter.lab.setting-icon-label": "Theme Toggle",
+  "title": "Theme Toggle",
+  "description": "Toggle the JupyterLab theme",
+  "properties": {},
+  "additionalProperties": false,
+  "jupyter.lab.shortcuts": [
+    {
+      "command": "jupyterlab-theme-toggle:toggle",
+      "keys": ["Accel Y"],
+      "selector": "body"
+    }
+  ],
+  "type": "object"
+}
