@@ -1,32 +1,44 @@
 # jupyterlab-theme-toggle
 
-JupyterLab extension to toggle the theme in the Top Bar area
+JupyterLab extension to toggle the theme in the Top Bar area.
 
+![screencast](./docs/screencast.gif)
+
+This extension was originally developed as part of the [jupyterlab-topbar](https://github.com/jtpio/jupyterlab-topbar) project, and extracted into its own repository later on.
 
 ## Prerequisites
 
-* JupyterLab
+* JupyterLab 1.0
 
 ## Installation
 
+This extension requires the `jupyterlab-topbar-extension` extension for JupyterLab.
+
 ```bash
-jupyter labextension install jupyterlab-theme-toggle
+jupyter labextension install jupyterlab-topbar-extension jupyterlab-theme-toggle
 ```
 
 ## Development
 
-For a development install (requires npm version 4 or later), do the following in the repository directory:
-
 ```bash
-npm install
-npm run build
-jupyter labextension link .
+# create a new conda environment
+conda create -n jupyterlab-theme-toggle jupyterlab nodejs
+conda activate jupyterlab-theme-toggle
+
+# required to place indicators in the top area
+jupyter labextension install jupyterlab-topbar-extension
+
+# install dependencies
+jlpm
+
+# local install of the extension
+jupyter labextension install .
 ```
 
 To rebuild the package and the JupyterLab app:
 
 ```bash
-npm run build
+jlpm run build
 jupyter lab build
 ```
 

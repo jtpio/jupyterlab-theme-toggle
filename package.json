@@ -7,9 +7,9 @@
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "homepage": "http://github.com/jtpio/jupyterlab-topbar",
+  "homepage": "http://github.com/jtpio/jupyterlab-theme-toggle",
   "bugs": {
-    "url": "http://github.com/jtpio/jupyterlab-topbar/issues"
+    "url": "http://github.com/jtpio/jupyterlab-theme-toggle/issues"
   },
   "license": "BSD-3-Clause",
   "author": "Jeremy Tuloup",
@@ -21,7 +21,7 @@
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/jtpio/jupyterlab-topbar.git"
+    "url": "http://github.com/jtpio/jupyterlab-theme-toggle.git"
   },
   "scripts": {
     "build": "tsc",
