@@ -1,5 +1,7 @@
 # jupyterlab-theme-toggle
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jtpio/jupyterlab-theme-toggle/stable?urlpath=lab)
+
 JupyterLab extension to toggle the theme in the Top Bar area.
 
 ![screencast](./docs/screencast.gif)

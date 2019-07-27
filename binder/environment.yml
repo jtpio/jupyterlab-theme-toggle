@@ -1,0 +1,7 @@
+name: jupyterlab-theme-toggle
+channels:
+- conda-forge
+dependencies:
+- python=3.7
+- jupyterlab=1.0
+- nodejs=10
