@@ -117,9 +117,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     const { commands } = app;
     commands.addCommand('jupyterlab-theme-toggle:toggle', {
       label: "Toggle Theme",
-      execute: (args: any) => {
-        onChange();
-      }
+      execute: onChange
     })
 
     topBar.addItem("theme-toggle", widget);
