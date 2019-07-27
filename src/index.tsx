@@ -84,7 +84,7 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
  * Initialization data for the jupyterlab-theme-toggle extension.
  */
 const extension: JupyterFrontEndPlugin<void> = {
-  id: "jupyterlab-theme-toggle",
+  id: "jupyterlab-theme-toggle:plugin",
   autoStart: true,
   requires: [IThemeManager, ITopBar],
   activate: (
@@ -113,6 +113,12 @@ const extension: JupyterFrontEndPlugin<void> = {
         innerLabelChecked="dark"
       />
     );
+
+    const { commands } = app;
+    commands.addCommand('jupyterlab-theme-toggle:toggle', {
+      label: "Toggle Theme",
+      execute: onChange
+    })
 
     topBar.addItem("theme-toggle", widget);
   }
