@@ -86,14 +86,15 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
 const extension: JupyterFrontEndPlugin<void> = {
   id: "jupyterlab-theme-toggle:plugin",
   autoStart: true,
-  requires: [IThemeManager, ITopBar],
+  requires: [IThemeManager],
+  optional: [ITopBar],
   activate: (
     app: JupyterFrontEnd,
     themeManager: IThemeManager,
     topBar: ITopBar
   ) => {
     // TODO: make this configurable via the settings?
-    let themes = [
+    const themes = [
       "JupyterLab Light", // Light Theme goes first
       "JupyterLab Dark"
     ];
@@ -105,22 +106,23 @@ const extension: JupyterFrontEndPlugin<void> = {
       });
     };
 
-    let widget = ReactWidget.create(
-      <Switch
-        themeManager={themeManager}
-        onChange={onChange}
-        innerLabel="light"
-        innerLabelChecked="dark"
-      />
-    );
-
     const { commands } = app;
     commands.addCommand('jupyterlab-theme-toggle:toggle', {
       label: "Toggle Theme",
       execute: onChange
     })
 
-    topBar.addItem("theme-toggle", widget);
+    if (topBar) {
+      const widget = ReactWidget.create(
+        <Switch
+          themeManager={themeManager}
+          onChange={onChange}
+          innerLabel="light"
+          innerLabelChecked="dark"
+        />
+      );
+      topBar.addItem("theme-toggle", widget);
+    }
   }
 };
 

@@ -15,11 +15,18 @@ This extension was originally developed as part of the [jupyterlab-topbar](https
 
 ## Installation
 
-This extension requires the `jupyterlab-topbar-extension` extension for JupyterLab.
+This extension requires the `jupyterlab-topbar-extension` extension for JupyterLab to display the visual switch:
 
 ```bash
 jupyter labextension install jupyterlab-topbar-extension jupyterlab-theme-toggle
 ```
+
+To only install the keyboard shortcut (`Cmd/Ctrl+y` by default):
+
+```bash
+jupyter labextension install jupyterlab-theme-toggle
+```
+
 
 ## Development
 
