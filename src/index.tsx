@@ -94,7 +94,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     topBar: ITopBar
   ) => {
     // TODO: make this configurable via the settings?
-    let themes = [
+    const themes = [
       "JupyterLab Light", // Light Theme goes first
       "JupyterLab Dark"
     ];
@@ -113,7 +113,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     })
 
     if (topBar) {
-      let widget = ReactWidget.create(
+      const widget = ReactWidget.create(
         <Switch
           themeManager={themeManager}
           onChange={onChange}
