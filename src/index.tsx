@@ -41,19 +41,10 @@ const Switch = (props: ISwitchProps) => {
   };
 
   useEffect(() => {
-    let timeout = 0;
-    if (!themeManager.theme) {
-      // TODO: investigate why the themeManager is undefined
-      timeout = setTimeout(() => {
-        updateChecked();
-      }, 500);
-    } else {
-      updateChecked();
-    }
+    updateChecked();
     themeManager.themeChanged.connect(updateChecked);
 
     return () => {
-      clearTimeout(timeout);
       themeManager.themeChanged.disconnect(updateChecked);
     }
   });
