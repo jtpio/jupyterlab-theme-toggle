@@ -7,7 +7,7 @@ import { IThemeManager, ReactWidget } from "@jupyterlab/apputils";
 
 import { ITopBar } from "jupyterlab-topbar";
 
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import { FocusStyleManager } from "@blueprintjs/core";
 
@@ -26,58 +26,45 @@ interface ISwitchProps extends IBPSwitchProps {
   dark?: boolean;
 }
 
-interface ISwitchState {
-  dark: boolean;
-}
+const Switch = (props: ISwitchProps) => {
+  let { themeManager, ...others } = props;
 
-class Switch extends React.Component<ISwitchProps, ISwitchState> {
-  private timeout: number = 0;
+  const [dark, setDark] = useState(false);
 
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      dark: props.dark || false
-    };
-  }
+  useEffect(() => {
+    setDark(!!props.dark);
+  }, [props.dark]);
 
-  componentDidMount() {
-    let { themeManager } = this.props;
-    if (!themeManager.theme) {
-      // TODO: investigate why the themeManager is undefined
-      this.timeout = setTimeout(() => {
-        this.updateChecked();
-      }, 500);
-    } else {
-      this.updateChecked();
-    }
-    themeManager.themeChanged.connect(this.updateChecked, this);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-    let { themeManager } = this.props;
-    themeManager.themeChanged.disconnect(this.updateChecked, this);
-  }
-
-  updateChecked = () => {
-    let { themeManager } = this.props;
+  const updateChecked = () => {
     const isDark = !themeManager.isLight(themeManager.theme);
-    this.setState({
-      dark: !!isDark
-    });
+    setDark(!!isDark);
   };
 
-  render() {
-    let { themeManager, dark, ...others } = this.props;
+  useEffect(() => {
+    let timeout = 0;
+    if (!themeManager.theme) {
+      // TODO: investigate why the themeManager is undefined
+      timeout = setTimeout(() => {
+        updateChecked();
+      }, 500);
+    } else {
+      updateChecked();
+    }
+    themeManager.themeChanged.connect(updateChecked);
 
-    return (
-      <BPSwitch
-        {...others}
-        checked={this.state.dark}
-        className={this.props.className + " jp-Switch"}
-      />
-    );
-  }
+    return () => {
+      clearTimeout(timeout);
+      themeManager.themeChanged.disconnect(updateChecked);
+    }
+  });
+
+  return (
+    <BPSwitch
+      {...others}
+      checked={dark}
+      className={props.className + " jp-Switch"}
+    />
+  );
 }
 
 /**
