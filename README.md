@@ -11,7 +11,7 @@ This extension was originally developed as part of the [jupyterlab-topbar](https
 
 ## Prerequisites
 
-* JupyterLab 1.0
+* JupyterLab 1.0+
 
 ## Installation
 

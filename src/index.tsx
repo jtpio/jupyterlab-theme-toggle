@@ -1,3 +1,10 @@
+import { FocusStyleManager } from "@blueprintjs/core";
+
+import {
+  Switch as BPSwitch,
+  ISwitchProps as IBPSwitchProps
+} from "@blueprintjs/core/lib/cjs/components/forms/controls";
+
 import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
@@ -8,13 +15,6 @@ import { IThemeManager, ReactWidget } from "@jupyterlab/apputils";
 import { ITopBar } from "jupyterlab-topbar";
 
 import React, { useState, useEffect } from "react";
-
-import { FocusStyleManager } from "@blueprintjs/core";
-
-import {
-  Switch as BPSwitch,
-  ISwitchProps as IBPSwitchProps
-} from "@blueprintjs/core/lib/cjs/components/forms/controls";
 
 import "../style/index.css";
 
@@ -27,7 +27,7 @@ interface ISwitchProps extends IBPSwitchProps {
 }
 
 const Switch = (props: ISwitchProps) => {
-  let { themeManager, ...others } = props;
+  const { themeManager, ...others } = props;
 
   const [dark, setDark] = useState(false);
 
