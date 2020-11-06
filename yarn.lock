@@ -9,7 +9,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@blueprintjs/core@^3.15.1", "@blueprintjs/core@^3.22.2", "@blueprintjs/core@^3.34.0":
+"@blueprintjs/core@^3.22.2", "@blueprintjs/core@^3.32.1", "@blueprintjs/core@^3.34.0":
   version "3.35.0"
   resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-3.35.0.tgz#ed48ad7e6692f7dc32e28200a7984e029102ce3f"
   integrity sha512-2coEMDX1JJuHvDCt6wZSB6zntDlKvUmi4rqjLeGR+ZOo4TtFB92GSjycMtupka1PURM1A66oQZvnMiBIjuMW6Q==

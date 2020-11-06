@@ -31,7 +31,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.15.1",
+    "@blueprintjs/core": "^3.32.1",
     "@jupyterlab/application": "^3.0.0-rc.7",
     "@jupyterlab/apputils": "^3.0.0-rc.7",
     "jupyterlab-topbar": "^0.6.0",
