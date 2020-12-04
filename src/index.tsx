@@ -1,22 +1,21 @@
-import { FocusStyleManager } from "@blueprintjs/core";
-
 import {
+  FocusStyleManager,
   Switch as BPSwitch,
   ISwitchProps as IBPSwitchProps
-} from "@blueprintjs/core/lib/cjs/components/forms/controls";
+} from '@blueprintjs/core';
 
 import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
-} from "@jupyterlab/application";
+} from '@jupyterlab/application';
 
-import { IThemeManager, ReactWidget } from "@jupyterlab/apputils";
+import { DOMUtils, IThemeManager, ReactWidget } from '@jupyterlab/apputils';
 
-import { ITopBar } from "jupyterlab-topbar";
+import { ITopBar } from 'jupyterlab-topbar';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import "../style/index.css";
+import '../style/index.css';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
@@ -26,7 +25,7 @@ interface ISwitchProps extends IBPSwitchProps {
   dark?: boolean;
 }
 
-const Switch = (props: ISwitchProps) => {
+const Switch = (props: ISwitchProps): JSX.Element => {
   const { themeManager, ...others } = props;
 
   const [dark, setDark] = useState(false);
@@ -35,7 +34,7 @@ const Switch = (props: ISwitchProps) => {
     setDark(!!props.dark);
   }, [props.dark]);
 
-  const updateChecked = () => {
+  const updateChecked = (): void => {
     const isDark = !themeManager.isLight(themeManager.theme);
     setDark(!!isDark);
   };
@@ -52,26 +51,26 @@ const Switch = (props: ISwitchProps) => {
     }
     themeManager.themeChanged.connect(updateChecked);
 
-    return () => {
+    return (): void => {
       clearTimeout(timeout);
       themeManager.themeChanged.disconnect(updateChecked);
-    }
+    };
   });
 
   return (
     <BPSwitch
       {...others}
       checked={dark}
-      className={props.className + " jp-Switch"}
+      className={props.className + ' jp-ThemeSwitch'}
     />
   );
-}
+};
 
 /**
  * Initialization data for the jupyterlab-theme-toggle extension.
  */
 const extension: JupyterFrontEndPlugin<void> = {
-  id: "jupyterlab-theme-toggle:plugin",
+  id: 'jupyterlab-theme-toggle:plugin',
   autoStart: true,
   requires: [IThemeManager],
   optional: [ITopBar],
@@ -82,33 +81,37 @@ const extension: JupyterFrontEndPlugin<void> = {
   ) => {
     // TODO: make this configurable via the settings?
     const themes = [
-      "JupyterLab Light", // Light Theme goes first
-      "JupyterLab Dark"
+      'JupyterLab Light', // Light Theme goes first
+      'JupyterLab Dark'
     ];
 
-    const onChange = async () => {
+    const onChange = async (): Promise<void> => {
       const isLight = themeManager.isLight(themeManager.theme);
-      await app.commands.execute("apputils:change-theme", {
+      await app.commands.execute('apputils:change-theme', {
         theme: themes[~~isLight]
       });
     };
 
     const { commands } = app;
     commands.addCommand('jupyterlab-theme-toggle:toggle', {
-      label: "Toggle Theme",
+      label: 'Toggle Theme',
       execute: onChange
-    })
+    });
 
+    const widget = ReactWidget.create(
+      <Switch
+        themeManager={themeManager}
+        onChange={onChange}
+        innerLabel="light"
+        innerLabelChecked="dark"
+      />
+    );
+    widget.addClass('jp-ThemeSwitch')
     if (topBar) {
-      const widget = ReactWidget.create(
-        <Switch
-          themeManager={themeManager}
-          onChange={onChange}
-          innerLabel="light"
-          innerLabelChecked="dark"
-        />
-      );
-      topBar.addItem("theme-toggle", widget);
+      topBar.addItem('theme-toggle', widget);
+    } else {
+      widget.id = DOMUtils.createDomID();
+      app.shell.add(widget, 'top', { rank: 11000 });
     }
   }
 };

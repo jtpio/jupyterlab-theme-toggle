@@ -1,8 +1,14 @@
-.jp-Switch {
-    /* TODO: orange background? */
-    margin-bottom: 0;
+.jp-ThemeSwitch {
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.jp-Switch.bp3-control .bp3-control-indicator {
-    margin-right: 0px;
+.jp-ThemeSwitch.bp3-switch {
+  /* TODO: orange background? */
+  margin-bottom: 0;
+}
+
+.jp-ThemeSwitch.bp3-control .bp3-control-indicator {
+  margin-right: 0px;
 }

@@ -25,25 +25,49 @@
     "url": "http://github.com/jtpio/jupyterlab-theme-toggle.git"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo",
-    "prepare": "npm run clean && npm run build",
-    "watch": "tsc -w"
+    "build": "jlpm run build:lib && jlpm run build:labextension:dev",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc",
+    "build:prod": "jlpm run build:lib && jlpm run build:labextension",
+    "clean": "jlpm run clean:lib",
+    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "clean:labextension": "rimraf jupyterlab-theme-toggle/labextension",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "eslint": "eslint . --ext .ts,.tsx --fix",
+    "eslint:check": "eslint . --ext .ts,.tsx",
+    "install:extension": "jupyter labextension develop --overwrite .",
+    "prepare": "jlpm run clean && jlpm run build:prod",
+    "prettier": "prettier --write '**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}'",
+    "prettier:check": "prettier --list-different '**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}'",
+    "watch": "run-p watch:src watch:labextension",
+    "watch:labextension": "jupyter labextension watch .",
+    "watch:src": "tsc -w"
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.32.1",
-    "@jupyterlab/application": "^3.0.0-rc.7",
-    "@jupyterlab/apputils": "^3.0.0-rc.7",
+    "@blueprintjs/core": "^3.36.0",
+    "@jupyterlab/application": "^3.0.0-rc.12",
+    "@jupyterlab/apputils": "^3.0.0-rc.12",
     "jupyterlab-topbar": "^0.6.0",
-    "react": "^17.0.0"
+    "react": "^17.0.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.1",
+    "@jupyterlab/builder": "^3.0.0-rc.12",
+    "@types/react": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.0",
     "rimraf": "^3.0.2",
-    "typescript": "~4.0.0"
+    "typescript": "~4.0.3"
   },
   "jupyterlab": {
     "extension": true,
-    "schemaDir": "schema"
+    "schemaDir": "schema",
+    "outputDir": "jupyterlab-theme-toggle/labextension"
   }
 }

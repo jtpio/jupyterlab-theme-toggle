@@ -12,7 +12,7 @@ This extension was originally developed as part of the [jupyterlab-topbar](https
 
 ## Prerequisites
 
-* JupyterLab 1.0+
+- JupyterLab 1.0+
 
 ## Installation
 
@@ -28,28 +28,35 @@ To only install the keyboard shortcut (`Cmd/Ctrl+y` by default):
 jupyter labextension install jupyterlab-theme-toggle
 ```
 
-
 ## Development
 
 ```bash
+# Clone the repo to your local environment
+# Change directory to the jupyterlab-theme-toggle directory
+
 # create a new conda environment
-conda create -n jupyterlab-theme-toggle jupyterlab nodejs
+mamba create -n jupyterlab-theme-toggle jupyterlab nodejs
 conda activate jupyterlab-theme-toggle
 
-# required to place indicators in the top area
-jupyter labextension install jupyterlab-topbar-extension
-
-# install dependencies
-jlpm
-
-# local install of the extension
-jupyter labextension install .
+# Install package in development mode
+pip install -e .
+# Link your development version of the extension with JupyterLab
+jupyter labextension develop . --overwrite
+# Rebuild extension Typescript source after making changes
+jlpm run build
 ```
 
-To rebuild the package and the JupyterLab app:
+You can watch the source directory and run JupyterLab at the same time in different terminals to watch for changes in the extension's source and automatically rebuild the extension.
 
 ```bash
-jlpm run build
-jupyter lab build
+# Watch the source directory in one terminal, automatically rebuilding when needed
+jlpm run watch
+# Run JupyterLab in another terminal
+jupyter lab
 ```
 
+## Uninstall
+
+```bash
+pip uninstall jupyterlab-theme-toggle
+```
