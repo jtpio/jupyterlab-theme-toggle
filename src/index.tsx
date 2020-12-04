@@ -106,7 +106,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         innerLabelChecked="dark"
       />
     );
-    widget.addClass('jp-ThemeSwitch')
+    widget.addClass('jp-ThemeSwitch');
     if (topBar) {
       topBar.addItem('theme-toggle', widget);
     } else {
