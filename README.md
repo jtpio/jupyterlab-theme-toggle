@@ -4,6 +4,20 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jtpio/jupyterlab-theme-toggle/stable?urlpath=lab)
 [![npm](https://img.shields.io/npm/v/jupyterlab-theme-toggle.svg)](https://www.npmjs.com/package/jupyterlab-theme-toggle)
 
+
+## ⚠️ Archived ⚠️
+
+This repository is now **archived**.
+
+The Theme Toggle extension has been moved to the Jupyter Top Bar repository: https://github.com/jupyterlab-contrib/jupyterlab-topbar
+
+If you are using JupyterLab 4+, install with:
+
+```
+pip install jupyterlab-theme-toggle
+```
+
+---
 JupyterLab extension to toggle the theme in the Top Bar area.
 
 ![screencast](./docs/screencast.gif)
